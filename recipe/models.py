@@ -20,7 +20,7 @@ class Recipe(models.Model):
     recipe_title = models.CharField(max_length=50, unique=True)
     slug = models.SlugField(max_length=50, unique=True)
     recipe_description = models.TextField()
-    image = models.ImageField(upload_to='recipe/')
+    image = models.ImageField(upload_to='recipe_img/')
     composition = models.TextField(null=True, blank=True, default="Will be added soon")
 
     class Meta:
