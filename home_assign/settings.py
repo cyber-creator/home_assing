@@ -54,8 +54,7 @@ ROOT_URLCONF = 'home_assign.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -69,11 +68,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'home_assign.wsgi.application'
-
-
-
-
-# Password validation
+W
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -143,9 +138,6 @@ S3_URL = '//%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
 STATIC_URL = S3_URL + 'static/'
 MEDIA_URL = '//%s.s3.amazonaws.com/media/' % AWS_STORAGE_BUCKET_NAME
 
-STATICFILES_DIRS = [
-    BASE_DIR / 'static'
-]
 
 MEDIA_ROOT = MEDIA_URL
 STATIC_ROOT = BASE_DIR / 'staticfiles'
