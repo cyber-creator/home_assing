@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -35,6 +36,7 @@ INSTALLED_APPS = [
 
     # additional apps
     'rest_framework',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -111,6 +113,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -121,3 +125,26 @@ try:
     from .local_settings import *
 except ImportError:
     print("Create file and Import fucking settings")
+
+
+AWS_QUERYSTRING_AUTH = False
+DEFAULT_FILE_STORAGE = 'home_assign.aws.utils.MediaRootS3BotoStorage'
+STATICFILES_STORAGE = 'home_assign.aws.utils.StaticRootS3BotoStorage'
+
+
+AWS_ACCESS_KEY_ID = ACCESS_KEY
+AWS_SECRET_ACCESS_KEY = SECRET_ACCESS_KEY
+AWS_S3_FILE_OVERWRITE = False
+
+AWS_STORAGE_BUCKET_NAME = STORAGE_BUCKET_NAME
+S3_URL = '//%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+
+STATIC_URL = S3_URL + 'static/'
+MEDIA_URL = '//%s.s3.amazonaws.com/media/' % AWS_STORAGE_BUCKET_NAME
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'
+]
+
+MEDIA_ROOT = MEDIA_URL
+STATIC_ROOT = BASE_DIR / 'staticfiles'
